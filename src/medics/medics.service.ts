@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
+import { UpdateMedicDto } from './dto/update.medic.dto.js';
 
 @Injectable()
 export class MedicsService {
@@ -96,19 +97,13 @@ export class MedicsService {
     });
   }
 
-  async update(
-    id: number,
-    data: {
-      professionalCode: string;
-      medicPhone?: string;
-      userId: number;
-      specialtyId: number;
-    },
-  ) {
+  async update(id: number, updateMedicDto: UpdateMedicDto) {
     const numericId = Number(id);
     return await this.prisma.medic.update({
       where: { id: numericId },
-      data,
+      data: {
+        ...updateMedicDto,
+      },
     });
   }
 
