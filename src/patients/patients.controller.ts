@@ -8,6 +8,8 @@ import {
   Body,
 } from '@nestjs/common';
 import { PatientsService } from './patients.service.js';
+import { CreatePatientDto } from './dto/create.patient.dto.js';
+import { UpdatePatientDto } from './dto/update.patient.dto.js';
 
 @Controller('patients')
 export class PatientsController {
@@ -24,13 +26,13 @@ export class PatientsController {
   }
 
   @Post()
-  create(@Body() body: any) {
-    return this.patientsService.create(body);
+  create(@Body() dto: CreatePatientDto) {
+    return this.patientsService.create(dto);
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() body: any) {
-    return this.patientsService.update(id, body);
+  update(@Param('id') id: number, @Body() dto: UpdatePatientDto) {
+    return this.patientsService.update(id, dto);
   }
 
   @Delete(':id')
