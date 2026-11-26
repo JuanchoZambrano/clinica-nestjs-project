@@ -90,6 +90,8 @@ export class PatientsService {
       data,
       select: {
         id: true,
+        patientName: true,
+        patientLastName: true,
         personalId: true,
         patientEmail: true,
       },
