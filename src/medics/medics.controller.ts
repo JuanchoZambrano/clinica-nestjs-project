@@ -10,8 +10,14 @@ import {
 import { MedicsService } from './medics.service.js';
 import { CreateMedicDto } from './dto/create.medic.dto.js';
 import { UpdateMedicDto } from './dto/update.medic.dto.js';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { RolesGuard } from '../auth/guards/roles.guard.js';
+import { Roles } from '../auth/decorators/roles.decorator.js';
 
 @Controller('medics')
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles('ADMIN', 'RECEPTIONIST')
 export class MedicsController {
   constructor(private readonly medicsService: MedicsService) {}
 
